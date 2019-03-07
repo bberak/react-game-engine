@@ -1,0 +1,47 @@
+{
+  "name": "react-game-engine",
+  "version": "0.0.1",
+  "description": "A lightweight game engine for React projects",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "prepublish": "rm -rf ./build && npm run build"
+  },
+  "jest": {
+    "testURL": "http://localhost/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bberak/react-game-engine.git"
+  },
+  "keywords": [
+    "React",
+    "JS",
+    "Game",
+    "Engine",
+    "2D",
+    "3D"
+  ],
+  "author": "Boris Berak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bberak/react-game-engine/issues"
+  },
+  "homepage": "https://github.com/bberak/react-game-engine",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "jest": "^22.4.2",
+    "react": "*",
+    "react-test-renderer": "^16.2.0",
+    "webpack": "^2.6.1"
+  }
+}
