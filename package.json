@@ -1,6 +1,6 @@
 {
   "name": "react-game-engine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A lightweight game engine for React projects",
   "main": "build/index.js",
   "scripts": {
@@ -34,11 +34,12 @@
   },
   "devDependencies": {
     "babel-jest": "^22.4.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "babel-loader": "^7.0.0",
     "jest": "^22.4.2",
     "react": "*",
     "react-test-renderer": "^16.2.0",
