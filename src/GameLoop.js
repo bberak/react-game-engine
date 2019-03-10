@@ -65,7 +65,10 @@ export default class GameLoop extends Component {
     .split(" ")
     .map(name => ({
       name,
-      handler: payload => this.input.push({ name, payload })
+      handler: payload => {
+        payload.persist();
+        this.input.push({ name, payload });
+      }
     }))
     .reduce((acc, val) => {
       acc[val.name] = val.handler;

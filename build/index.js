@@ -311,7 +311,8 @@ var GameEngine = function (_Component) {
       return {
         name: name,
         handler: function handler(payload) {
-          return _this.input.push({ name: name, payload: payload });
+          payload.persist();
+          _this.input.push({ name: name, payload: payload });
         }
       };
     }).reduce(function (acc, val) {
@@ -500,7 +501,8 @@ var GameLoop = function (_Component) {
       return {
         name: name,
         handler: function handler(payload) {
-          return _this.input.push({ name: name, payload: payload });
+          payload.persist();
+          _this.input.push({ name: name, payload: payload });
         }
       };
     }).reduce(function (acc, val) {
