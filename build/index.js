@@ -396,7 +396,10 @@ var GameEngine = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        _extends({ style: [css.container, this.props.style] }, this.inputHandlers),
+        _extends({
+          style: _extends({}, css.container, this.props.style),
+          className: this.props.className
+        }, this.inputHandlers),
         this.state.entities ? this.props.renderer(this.state.entities, this.screen) : null,
         this.props.children
       );
@@ -537,8 +540,11 @@ var GameLoop = function (_Component) {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
-        View,
-        _extends({ style: [css.container, this.props.style] }, this.inputHandlers),
+        "div",
+        _extends({
+          style: _extends({}, css.container, this.props.style),
+          className: this.props.className
+        }, this.inputHandlers),
         this.props.children
       );
     }

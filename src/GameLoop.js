@@ -74,9 +74,13 @@ export default class GameLoop extends Component {
 
   render() {
     return (
-      <View style={[css.container, this.props.style]} {...this.inputHandlers}>
+      <div
+        style={{ ...css.container, ...this.props.style }}
+        className={this.props.className}
+        {...this.inputHandlers}
+      >
         {this.props.children}
-      </View>
+      </div>
     );
   }
 }

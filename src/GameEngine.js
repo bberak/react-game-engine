@@ -140,7 +140,11 @@ export default class GameEngine extends Component {
 
   render() {
     return (
-      <div style={[css.container, this.props.style]} {...this.inputHandlers}>
+      <div
+        style={{ ...css.container, ...this.props.style }}
+        className={this.props.className}
+        {...this.inputHandlers}
+      >
         {this.state.entities
           ? this.props.renderer(this.state.entities, this.screen)
           : null}
