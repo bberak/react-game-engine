@@ -98,11 +98,11 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-var DefaultTimer = function () {
-  function DefaultTimer() {
+var Timer = function () {
+  function Timer() {
     var _this = this;
 
-    _classCallCheck(this, DefaultTimer);
+    _classCallCheck(this, Timer);
 
     this.loop = function (time) {
       if (_this.loopId) {
@@ -118,7 +118,7 @@ var DefaultTimer = function () {
     this.loopId = null;
   }
 
-  _createClass(DefaultTimer, [{
+  _createClass(Timer, [{
     key: "start",
     value: function start() {
       if (!this.loopId) {
@@ -147,10 +147,10 @@ var DefaultTimer = function () {
     }
   }]);
 
-  return DefaultTimer;
+  return Timer;
 }();
 
-exports.default = DefaultTimer;
+exports.default = Timer;
 
 /***/ }),
 /* 1 */
@@ -429,7 +429,8 @@ var GameEngine = function (_Component) {
         "div",
         _extends({
           style: _extends({}, css.container, this.props.style),
-          className: this.props.className
+          className: this.props.className,
+          tabIndex: 0
         }, this.inputHandlers),
         this.state.entities ? this.props.renderer(this.state.entities, this.screen) : null,
         this.props.children
@@ -452,7 +453,8 @@ GameEngine.defaultProps = {
 
 var css = {
   container: {
-    flex: 1
+    flex: 1,
+    outline: "none"
   }
 };
 

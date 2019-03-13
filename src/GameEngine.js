@@ -146,6 +146,7 @@ export default class GameEngine extends Component {
       <div
         style={{ ...css.container, ...this.props.style }}
         className={this.props.className}
+        tabIndex={0}
         {...this.inputHandlers}
       >
         {this.state.entities
@@ -166,6 +167,7 @@ GameEngine.defaultProps = {
 
 const css = {
   container: {
-    flex: 1
+    flex: 1,
+    outline: "none"
   }
 };
