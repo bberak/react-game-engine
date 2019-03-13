@@ -69,12 +69,6 @@ module.exports =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -159,7 +153,43 @@ var DefaultTimer = function () {
 exports.default = DefaultTimer;
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("react");
+
+/***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (state, window) {
+  return Object.keys(state).filter(function (key) {
+    return state[key].renderer;
+  }).map(function (key) {
+    var entity = state[key];
+    if (_typeof(entity.renderer) === "object") return _react2.default.createElement(entity.renderer.type, _extends({ key: key }, entity, { window: window }));else if (typeof entity.renderer === "function") return _react2.default.createElement(entity.renderer, _extends({ key: key }, entity, { window: window }));
+  });
+};
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -173,17 +203,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DefaultTimer = __webpack_require__(1);
+var _Timer = __webpack_require__(0);
 
-var _DefaultTimer2 = _interopRequireDefault(_DefaultTimer);
+var _Timer2 = _interopRequireDefault(_Timer);
 
-var _DefaultRenderer = __webpack_require__(4);
+var _Renderer = __webpack_require__(2);
 
-var _DefaultRenderer2 = _interopRequireDefault(_DefaultRenderer);
+var _Renderer2 = _interopRequireDefault(_Renderer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -323,7 +353,7 @@ var GameEngine = function (_Component) {
     _this.state = {
       entities: null
     };
-    _this.timer = props.timer || new _DefaultTimer2.default();
+    _this.timer = props.timer || new _Timer2.default();
     _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
     _this.previousTime = null;
@@ -416,7 +446,7 @@ exports.default = GameEngine;
 GameEngine.defaultProps = {
   systems: [],
   entities: {},
-  renderer: _DefaultRenderer2.default,
+  renderer: _Renderer2.default,
   running: true
 };
 
@@ -427,7 +457,7 @@ var css = {
 };
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -441,13 +471,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DefaultTimer = __webpack_require__(1);
+var _Timer = __webpack_require__(0);
 
-var _DefaultTimer2 = _interopRequireDefault(_DefaultTimer);
+var _Timer2 = _interopRequireDefault(_Timer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -510,7 +540,7 @@ var GameLoop = function (_Component) {
       return acc;
     }, {});
 
-    _this.timer = props.timer || new _DefaultTimer2.default();
+    _this.timer = props.timer || new _Timer2.default();
     _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
     _this.screen = Dimensions.get("window");
@@ -569,36 +599,6 @@ var css = {
 };
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (state, window) {
-  return Object.keys(state).filter(function (key) {
-    return state[key].renderer;
-  }).map(function (key) {
-    var entity = state[key];
-    if (_typeof(entity.renderer) === "object") return _react2.default.createElement(entity.renderer.type, _extends({ key: key }, entity, { window: window }));else if (typeof entity.renderer === "function") return _react2.default.createElement(entity.renderer, _extends({ key: key }, entity, { window: window }));
-  });
-};
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -608,20 +608,30 @@ exports.default = function (state, window) {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.GameEngine = exports.GameLoop = undefined;
+exports.Timer = exports.Renderer = exports.GameEngine = exports.GameLoop = undefined;
 
-var _GameLoop = __webpack_require__(3);
+var _GameLoop = __webpack_require__(4);
 
 var _GameLoop2 = _interopRequireDefault(_GameLoop);
 
-var _GameEngine = __webpack_require__(2);
+var _GameEngine = __webpack_require__(3);
 
 var _GameEngine2 = _interopRequireDefault(_GameEngine);
+
+var _Renderer = __webpack_require__(2);
+
+var _Renderer2 = _interopRequireDefault(_Renderer);
+
+var _Timer = __webpack_require__(0);
+
+var _Timer2 = _interopRequireDefault(_Timer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.GameLoop = _GameLoop2.default;
 exports.GameEngine = _GameEngine2.default;
+exports.Renderer = _Renderer2.default;
+exports.Timer = _Timer2.default;
 
 /***/ })
 /******/ ]);
