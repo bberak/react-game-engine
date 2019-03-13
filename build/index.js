@@ -256,6 +256,7 @@ var GameEngine = function (_Component) {
       _this.clear();
       _this.timer.start();
       _this.dispatch({ type: "started" });
+      _this.refs.container.focus();
     };
 
     _this.stop = function () {
@@ -428,6 +429,7 @@ var GameEngine = function (_Component) {
       return _react2.default.createElement(
         "div",
         _extends({
+          ref: "container",
           style: _extends({}, css.container, this.props.style),
           className: this.props.className,
           tabIndex: 0
@@ -504,6 +506,7 @@ var GameLoop = function (_Component) {
       _this.previousTime = null;
       _this.previousDelta = null;
       _this.timer.start();
+      _this.refs.container.focus();
     };
 
     _this.stop = function () {
@@ -576,6 +579,7 @@ var GameLoop = function (_Component) {
       return _react2.default.createElement(
         "div",
         _extends({
+          ref: "container",
           style: _extends({}, css.container, this.props.style),
           className: this.props.className,
           tabIndex: 0

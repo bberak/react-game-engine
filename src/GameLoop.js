@@ -36,6 +36,7 @@ export default class GameLoop extends Component {
     this.previousTime = null;
     this.previousDelta = null;
     this.timer.start();
+    this.refs.container.focus();
   };
 
   stop = () => {
@@ -78,6 +79,7 @@ export default class GameLoop extends Component {
   render() {
     return (
       <div
+        ref={"container"}
         style={{ ...css.container, ...this.props.style }}
         className={this.props.className}
         tabIndex={0}

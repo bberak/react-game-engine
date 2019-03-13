@@ -75,6 +75,7 @@ export default class GameEngine extends Component {
     this.clear();
     this.timer.start();
     this.dispatch({ type: "started" });
+    this.refs.container.focus();
   };
 
   stop = () => {
@@ -144,6 +145,7 @@ export default class GameEngine extends Component {
   render() {
     return (
       <div
+        ref={"container"}
         style={{ ...css.container, ...this.props.style }}
         className={this.props.className}
         tabIndex={0}
