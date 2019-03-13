@@ -577,7 +577,8 @@ var GameLoop = function (_Component) {
         "div",
         _extends({
           style: _extends({}, css.container, this.props.style),
-          className: this.props.className
+          className: this.props.className,
+          tabIndex: 0
         }, this.inputHandlers),
         this.props.children
       );
@@ -596,7 +597,8 @@ GameLoop.defaultProps = {
 
 var css = {
   container: {
-    flex: 1
+    flex: 1,
+    outline: "none"
   }
 };
 
