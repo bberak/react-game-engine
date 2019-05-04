@@ -95,7 +95,6 @@ To start with, let's create some components that can be rendered by React. Creat
 
 ```javascript
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
 
 class Finger extends PureComponent {
   render() {
