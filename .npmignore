@@ -3,3 +3,7 @@ webpack.config.js
 .babelrc
 .gitignore
 src/
+
+# Images and other content
+#
+logo.png
