@@ -7,5 +7,7 @@ export {
 	GameLoop,
 	GameEngine,
 	DefaultRenderer,
-	DefaultTimer
+	DefaultRenderer as Renderer,
+	DefaultTimer,
+	DefaultTimer as Timer
 };
