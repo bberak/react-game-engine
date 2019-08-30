@@ -616,7 +616,7 @@ var css = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.DefaultTimer = exports.DefaultRenderer = exports.GameEngine = exports.GameLoop = undefined;
+exports.Timer = exports.DefaultTimer = exports.Renderer = exports.DefaultRenderer = exports.GameEngine = exports.GameLoop = undefined;
 
 var _GameLoop = __webpack_require__(4);
 
@@ -639,7 +639,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.GameLoop = _GameLoop2.default;
 exports.GameEngine = _GameEngine2.default;
 exports.DefaultRenderer = _DefaultRenderer2.default;
+exports.Renderer = _DefaultRenderer2.default;
 exports.DefaultTimer = _DefaultTimer2.default;
+exports.Timer = _DefaultTimer2.default;
 
 /***/ })
 /******/ ]);
