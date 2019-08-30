@@ -1,11 +1,11 @@
 import GameLoop from "./GameLoop";
 import GameEngine from "./GameEngine";
-import Renderer from "./Renderer";
-import Timer from "./Timer";
+import DefaultRenderer from "./DefaultRenderer";
+import DefaultTimer from "./DefaultTimer";
 
 export {
 	GameLoop,
 	GameEngine,
-	Renderer,
-	Timer
+	DefaultRenderer,
+	DefaultTimer
 };

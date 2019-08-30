@@ -98,11 +98,11 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-var Timer = function () {
-  function Timer() {
+var DefaultTimer = function () {
+  function DefaultTimer() {
     var _this = this;
 
-    _classCallCheck(this, Timer);
+    _classCallCheck(this, DefaultTimer);
 
     this.loop = function (time) {
       if (_this.loopId) {
@@ -118,7 +118,7 @@ var Timer = function () {
     this.loopId = null;
   }
 
-  _createClass(Timer, [{
+  _createClass(DefaultTimer, [{
     key: "start",
     value: function start() {
       if (!this.loopId) {
@@ -147,10 +147,10 @@ var Timer = function () {
     }
   }]);
 
-  return Timer;
+  return DefaultTimer;
 }();
 
-exports.default = Timer;
+exports.default = DefaultTimer;
 
 /***/ }),
 /* 1 */
@@ -207,13 +207,13 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Timer = __webpack_require__(0);
+var _DefaultTimer = __webpack_require__(0);
 
-var _Timer2 = _interopRequireDefault(_Timer);
+var _DefaultTimer2 = _interopRequireDefault(_DefaultTimer);
 
-var _Renderer = __webpack_require__(2);
+var _DefaultRenderer = __webpack_require__(2);
 
-var _Renderer2 = _interopRequireDefault(_Renderer);
+var _DefaultRenderer2 = _interopRequireDefault(_DefaultRenderer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -354,7 +354,7 @@ var GameEngine = function (_Component) {
     _this.state = {
       entities: null
     };
-    _this.timer = props.timer || new _Timer2.default();
+    _this.timer = props.timer || new _DefaultTimer2.default();
     _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
     _this.previousTime = null;
@@ -434,7 +434,7 @@ var GameEngine = function (_Component) {
           className: this.props.className,
           tabIndex: 0
         }, this.inputHandlers),
-        this.state.entities ? this.props.renderer(this.state.entities, this.screen) : null,
+        this.state.entities ? this.props.renderer(this.state.entities, window) : null,
         this.props.children
       );
     }
@@ -449,7 +449,7 @@ exports.default = GameEngine;
 GameEngine.defaultProps = {
   systems: [],
   entities: {},
-  renderer: _Renderer2.default,
+  renderer: _DefaultRenderer2.default,
   running: true
 };
 
@@ -479,9 +479,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Timer = __webpack_require__(0);
+var _DefaultTimer = __webpack_require__(0);
 
-var _Timer2 = _interopRequireDefault(_Timer);
+var _DefaultTimer2 = _interopRequireDefault(_DefaultTimer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -545,7 +545,7 @@ var GameLoop = function (_Component) {
       return acc;
     }, {});
 
-    _this.timer = props.timer || new _Timer2.default();
+    _this.timer = props.timer || new _DefaultTimer2.default();
     _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
     _this.screen = Dimensions.get("window");
@@ -616,7 +616,7 @@ var css = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.Timer = exports.Renderer = exports.GameEngine = exports.GameLoop = undefined;
+exports.DefaultTimer = exports.DefaultRenderer = exports.GameEngine = exports.GameLoop = undefined;
 
 var _GameLoop = __webpack_require__(4);
 
@@ -626,20 +626,20 @@ var _GameEngine = __webpack_require__(3);
 
 var _GameEngine2 = _interopRequireDefault(_GameEngine);
 
-var _Renderer = __webpack_require__(2);
+var _DefaultRenderer = __webpack_require__(2);
 
-var _Renderer2 = _interopRequireDefault(_Renderer);
+var _DefaultRenderer2 = _interopRequireDefault(_DefaultRenderer);
 
-var _Timer = __webpack_require__(0);
+var _DefaultTimer = __webpack_require__(0);
 
-var _Timer2 = _interopRequireDefault(_Timer);
+var _DefaultTimer2 = _interopRequireDefault(_DefaultTimer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.GameLoop = _GameLoop2.default;
 exports.GameEngine = _GameEngine2.default;
-exports.Renderer = _Renderer2.default;
-exports.Timer = _Timer2.default;
+exports.DefaultRenderer = _DefaultRenderer2.default;
+exports.DefaultTimer = _DefaultTimer2.default;
 
 /***/ })
 /******/ ]);

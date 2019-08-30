@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Timer from "./Timer";
+import DefaultTimer from "./DefaultTimer";
 
 const events = `onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onWheel onTouchCancel onTouchEnd onTouchMove onTouchStart onKeyDown onKeyPress onKeyUp`;
 
 export default class GameLoop extends Component {
   constructor(props) {
     super(props);
-    this.timer = props.timer || new Timer();
+    this.timer = props.timer || new DefaultTimer();
     this.timer.subscribe(this.updateHandler);
     this.input = [];
     this.screen = Dimensions.get("window");

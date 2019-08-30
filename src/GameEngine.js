@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Timer from "./Timer";
-import Renderer from "./Renderer";
+import DefaultTimer from "./DefaultTimer";
+import DefaultRenderer from "./DefaultRenderer";
 
 const getEntitiesFromProps = props =>
   props.initState ||
@@ -28,7 +28,7 @@ export default class GameEngine extends Component {
     this.state = {
       entities: null
     };
-    this.timer = props.timer || new Timer();
+    this.timer = props.timer || new DefaultTimer();
     this.timer.subscribe(this.updateHandler);
     this.input = [];
     this.previousTime = null;
@@ -163,7 +163,7 @@ export default class GameEngine extends Component {
 GameEngine.defaultProps = {
   systems: [],
   entities: {},
-  renderer: Renderer,
+  renderer: DefaultRenderer,
   running: true
 };
 
