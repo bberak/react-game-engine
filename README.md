@@ -81,6 +81,19 @@ Like I said, I'm dubious about this change - happy to hear any feedback on this.
 
 ## Quick Start
 
+If you've used **react-game-engine** before and understand the core concepts, take a look at [react-game-engine-template](https://github.com/bberak/react-game-engine-template). It's a sort of game kickstarter project that allows you to prototype ideas quickly and comes preloaded with a bunch of stuff like:
+
+- A 3D renderer
+- Physics
+- Particle system
+- Crude sound API
+- Sprite support with animations
+- Etc
+
+Otherwise, continue reading the quick start guide below.
+
+<hr />
+
 Firstly, install the package to your project:
 
 ```npm install --save react-game-engine```
