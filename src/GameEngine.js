@@ -152,7 +152,7 @@ export default class GameEngine extends Component {
         {...this.inputHandlers}
       >
         {this.state.entities
-          ? this.props.renderer(this.state.entities, this.screen)
+          ? this.props.renderer(this.state.entities, window)
           : null}
         {this.props.children}
       </div>
