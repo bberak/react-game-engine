@@ -9,7 +9,6 @@ export default class GameLoop extends Component {
     this.timer = props.timer || new DefaultTimer();
     this.timer.subscribe(this.updateHandler);
     this.input = [];
-    this.screen = Dimensions.get("window");
     this.previousTime = null;
     this.previousDelta = null;
   }
