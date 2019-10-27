@@ -38,34 +38,6 @@ const sys1 = (entities, { input }) => {
 
 ```
 
-### Dispatch vs Defer
-
-The other `args` into the systems are still there. Hoever, there is one confusing change which I'm a bit dubious about at this moment.
-
-In RNGE, each system is passed a `dispatch` function that will send out an event asynchronously (once the frame is complete). This function has now been replaced by `defer` - deferring the processing of an event once the frame completes.
-
-`dispatch` is still there, however this will send out the event synchronously - causing any event handlers to be fired immediately.
-
-
-```javascript
-
-const sys1 = (entities, { input, defer, dispatch }) => {
-
-	const { payload } = input.find(x => x.name === "onMouseDown");
-
-	if (payload) {
-		dispatch("mouse-clicked"); //-- Event handlers will be notified immediately, blocking execution of the current frame
-		defer("mouse-clicked"); //-- Event handlers will be notified once this frame is completed
-	}
-
-	return entities;
-};
-
-````
-
-Like I said, I'm dubious about this change - happy to hear any feedback on this..
-
-
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -204,8 +176,7 @@ If you're curious, our ```GameEngine``` component is a loose implementation of t
 |**`stop`**|Stop the game loop |`NA`|
 |**`start`**|Start the game loop. |`NA`|
 |**`swap`**|A method that can be called to update your game with new entities. Can be useful for level switching etc. You can also pass a Promise that resolves to an entities object into this method. |`{} or Promise`|
-|**`dispatch`**|A method that can be called to dispatch events right now. The event will be received by the **subsequent** systems and any `onEvent` callbacks |`event`|
-|**`defer`**|A method that can be called to fire events after the currenty frame completed. The event will be received by **ALL** the systems and any `onEvent` callbacks |`event`|
+|**`dispatch`**|A method that can be called to fire events after the currenty frame completed. The event will be received by **ALL** the systems and any `onEvent` callbacks |`event`|
 
 ## FAQ
 

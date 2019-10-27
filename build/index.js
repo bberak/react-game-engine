@@ -302,14 +302,14 @@ var GameEngine = function (_Component) {
     }();
 
     _this.defer = function (e) {
-      setTimeout(function () {
-        return _this.dispatch(e);
-      }, 0);
+      _this.dispatch(e);
     };
 
     _this.dispatch = function (e) {
-      _this.events.push(e);
-      if (_this.props.onEvent) _this.props.onEvent(e);
+      setTimeout(function () {
+        _this.events.push(e);
+        if (_this.props.onEvent) _this.props.onEvent(e);
+      }, 0);
     };
 
     _this.updateHandler = function (currentTime) {

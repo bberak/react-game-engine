@@ -93,12 +93,14 @@ export default class GameEngine extends Component {
   };
 
   defer = e => {
-    setTimeout(() => this.dispatch(e), 0);
+    this.dispatch(e);
   };
 
   dispatch = e => {
-    this.events.push(e);
-    if (this.props.onEvent) this.props.onEvent(e);
+    setTimeout(() => {
+      this.events.push(e);
+      if (this.props.onEvent) this.props.onEvent(e);
+    }, 0);
   };
 
   updateHandler = currentTime => {
