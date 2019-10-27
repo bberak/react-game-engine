@@ -548,7 +548,6 @@ var GameLoop = function (_Component) {
     _this.timer = props.timer || new _DefaultTimer2.default();
     _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
-    _this.screen = Dimensions.get("window");
     _this.previousTime = null;
     _this.previousDelta = null;
     return _this;
