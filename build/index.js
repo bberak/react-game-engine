@@ -416,8 +416,8 @@ var GameEngine = function (_Component) {
       this.timer.unsubscribe(this.updateHandler);
     }
   }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.running !== this.props.running) {
         if (nextProps.running) this.start();else this.stop();
       }
@@ -564,8 +564,8 @@ var GameLoop = function (_Component) {
       this.timer.unsubscribe(this.updateHandler);
     }
   }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.running !== this.props.running) {
         if (nextProps.running) this.start();else this.stop();
       }
