@@ -54,7 +54,6 @@ export default class GameEngine extends Component {
   componentWillUnmount() {
     this.stop();
     this.timer.unsubscribe(this.updateHandler);
-    if (this.touchProcessor.end) this.touchProcessor.end();
   }
 
   componentWillReceiveProps(nextProps) {

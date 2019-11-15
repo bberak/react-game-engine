@@ -414,7 +414,6 @@ var GameEngine = function (_Component) {
     value: function componentWillUnmount() {
       this.stop();
       this.timer.unsubscribe(this.updateHandler);
-      if (this.touchProcessor.end) this.touchProcessor.end();
     }
   }, {
     key: "componentWillReceiveProps",
@@ -563,7 +562,6 @@ var GameLoop = function (_Component) {
     value: function componentWillUnmount() {
       this.stop();
       this.timer.unsubscribe(this.updateHandler);
-      if (this.touchProcessor.end) this.touchProcessor.end();
     }
   }, {
     key: "componentWillReceiveProps",
