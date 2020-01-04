@@ -26,16 +26,14 @@ Here's a system that would handle these events:
 
 ```javascript
 const sys1 = (entities, { input }) => {
+  const { payload } = input.find(x => x.name === "onMouseDown") || {};
 
-	const { payload } = input.find(x => x.name === "onMouseDown") || {};
+  if (payload) {
+    //-- Do something here
+  }
 
-	if (payload) {
-		//-- Do something here
-	}
-
-	return entities;
+  return entities;
 };
-
 ```
 
 ## Table of Contents
