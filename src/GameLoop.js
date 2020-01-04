@@ -22,7 +22,7 @@ export default class GameLoop extends Component {
     this.timer.unsubscribe(this.updateHandler);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.running !== this.props.running) {
       if (nextProps.running) this.start();
       else this.stop();
