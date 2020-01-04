@@ -152,9 +152,7 @@ export default class GameEngine extends Component {
         tabIndex={0}
         {...this.inputHandlers}
       >
-        {this.state.entities
-          ? this.props.renderer(this.state.entities, window)
-          : null}
+        {this.props.renderer(this.state.entities, window)}
         {this.props.children}
       </div>
     );
