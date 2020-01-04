@@ -27,7 +27,7 @@ Here's a system that would handle these events:
 ```javascript
 const sys1 = (entities, { input }) => {
 
-	const { payload } = input.find(x => x.name === "onMouseDown");
+	const { payload } = input.find(x => x.name === "onMouseDown") || {};
 
 	if (payload) {
 		//-- Do something here
@@ -73,7 +73,7 @@ Firstly, install the package to your project:
 Then import the GameEngine component:
 
 ```javascript
-import { GameEngine } from "react-game-engine"
+import { GameEngine } from "react-game-engine";
 ```
 
 To start with, let's create some components that can be rendered by React. Create a file called ```renderers.js```:
@@ -81,42 +81,42 @@ To start with, let's create some components that can be rendered by React. Creat
 ```javascript
 import React, { PureComponent } from "react";
 
-class Finger extends PureComponent {
+class Box extends PureComponent {
   render() {
-    const x = this.props.position[0] - RADIUS / 2;
-    const y = this.props.position[1] - RADIUS / 2;
+    const size = 100;
+    const x = this.props.x - size / 2;
+    const y = this.props.y - size / 2;
     return (
-      <div style={{ position: "absolute", width: 20, height: 20, backgroundColor: "red", left: x, top: y }]} />
+      <div style={{ position: "absolute", width: size, height: size, backgroundColor: "red", left: x, top: y }} />
     );
   }
 }
 
-export { Finger };
+export { Box };
 ```
 
 Next, let's code our logic in a file called ```systems.js```:
 
 ```javascript
-const MoveFinger = (entities, { input }) => {
-
+const MoveBox = (entities, { input }) => {
   //-- I'm choosing to update the game state (entities) directly for the sake of brevity and simplicity.
   //-- There's nothing stopping you from treating the game state as immutable and returning a copy..
   //-- Example: return { ...entities, t.id: { UPDATED COMPONENTS }};
   //-- That said, it's probably worth considering performance implications in either case.
 
-  const { payload } = input.find(x => x.name === "onMouseDown");
+  const { payload } = input.find(x => x.name === "onMouseDown") || {};
 
   if (payload) {
-  	const finger = entities["finger1"];
+    const box1 = entities["box1"];
 
-  	finger.position[0] = payload.pageX;
-  	finger.position[1] = payload.pageY;
+    box1.x = payload.pageX;
+    box1.y = payload.pageY;
   }
 
   return entities;
 };
 
-export { MoveFinger };
+export { MoveBox };
 ```
 
 Finally let's bring it all together in our `index.js`:
@@ -124,25 +124,20 @@ Finally let's bring it all together in our `index.js`:
 ```javascript
 import React, { PureComponent } from "react";
 import { GameEngine } from "react-game-engine";
-import { Finger } from "./renderers";
-import { MoveFinger } from "./systems"
+import { Box } from "./renderers";
+import { MoveBox } from "./systems"
 
-export default class BestGameEver extends PureComponent {
-  constructor() {
-    super();
-  }
-
+export default class SimpleGame extends PureComponent {
   render() {
     return (
       <GameEngine
-        systems={[MoveFinger]}
+        style={{ width: 800, height: 600, backgroundColor: "blue" }}
+        systems={[MoveBox]}
         entities={{
-		  //-- Notice that each entity has a unique id (required)
-		  //-- and a renderer property (optional). If no renderer
-		  //-- is supplied with the entity - it won't get displayed.
-          finger1: { position: [20,  200], renderer: <Finger />}, 
-          finger2: { position: [40,  200], renderer: <Finger />}, 
-          finger3: { position: [60,  200], renderer: <Finger />}
+          //-- Notice that each entity has a unique id (required)
+          //-- and a renderer property (optional). If no renderer
+          //-- is supplied with the entity - it won't get displayed.
+          box1: { x: 200,  y: 200, renderer: <Box />}
         }}>
 
       </GameEngine>
@@ -151,7 +146,7 @@ export default class BestGameEver extends PureComponent {
 }
 ```
 
-Build and run. Each entity is a **"finger"**. Every time you click on the screen, the first entity will move to the click coordinate.
+Build and run. Each entity is a **"box"**. Every time you click on the screen, the first entity will move to the clicked coordinate.
 
 If you're curious, our ```GameEngine``` component is a loose implementation of the [Compenent-Entity-System](#managing-complexity-with-component-entity-systems) pattern - we've written up a quick intro [here](#managing-complexity-with-component-entity-systems).
 
