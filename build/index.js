@@ -166,7 +166,7 @@ module.exports = require("react");
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -179,13 +179,18 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (state, window) {
-  return Object.keys(state).filter(function (key) {
-    return state[key].renderer;
-  }).map(function (key) {
-    var entity = state[key];
-    if (_typeof(entity.renderer) === "object") return _react2.default.createElement(entity.renderer.type, _extends({ key: key }, entity, { window: window }));else if (typeof entity.renderer === "function") return _react2.default.createElement(entity.renderer, _extends({ key: key }, entity, { window: window }));
-  });
+exports.default = function (entities, window) {
+	if (!entities || !window) return null;
+
+	return Object.keys(entities).filter(function (key) {
+		return entities[key].renderer;
+	}).map(function (key) {
+		var entity = entities[key];
+		if (_typeof(entity.renderer) === "object") return _react2.default.createElement(entity.renderer.type, _extends({
+			key: key,
+			window: window
+		}, entity));else if (typeof entity.renderer === "function") return _react2.default.createElement(entity.renderer, _extends({ key: key, window: window }, entity));
+	});
 };
 
 /***/ }),
@@ -433,7 +438,7 @@ var GameEngine = function (_Component) {
           className: this.props.className,
           tabIndex: 0
         }, this.inputHandlers),
-        this.state.entities ? this.props.renderer(this.state.entities, window) : null,
+        this.props.renderer(this.state.entities, window),
         this.props.children
       );
     }
