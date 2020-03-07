@@ -146,7 +146,7 @@ export default class SimpleGame extends PureComponent {
 
 Build and run. Each entity is a **"box"**. Every time you click on the screen, the first entity will move to the clicked coordinate.
 
-If you're curious, our ```GameEngine``` component is a loose implementation of the [Compenent-Entity-System](#managing-complexity-with-component-entity-systems) pattern - we've written up a quick intro [here](#managing-complexity-with-component-entity-systems).
+If you're curious, our ```GameEngine``` component is a loose implementation of the [Component-Entity-System](#managing-complexity-with-component-entity-systems) pattern - we've written up a quick intro [here](#managing-complexity-with-component-entity-systems).
 
 ## GameEngine Properties
 
@@ -194,7 +194,7 @@ This package contains only two components:
 
 Both are standalone components. The ```GameLoop``` is a subset of the ```GameEngine``` and gives you access to an ```onUpdate``` callback that fires every **16ms** (or roughly 60 fps). On top of this, the ```GameLoop``` will supply a reference to the screen (via ```Dimensions.get("window"))```, touch events for multiple fingers (start, end, press, long-press, move) and time + deltas. The ```GameLoop``` is useful for simple interactive scenes, and pretty much stays out of your way.
 
-The ```GameEngine``` is more opinionated and is a react-friendly implementation of the [Component-Entity-Systems pattern](#managing-complexity-with-component-entity-systems). It provides the same features out of the box as the ```GameEngine``` but also includes a crude event/signaling pipeline for communication between your game and your other React components. You probably want to use the ```GameEngine``` to implement slightly more complex games and interactive scenes.
+The ```GameEngine``` is more opinionated and is a react-friendly implementation of the [Component-Entity-Systems pattern](#managing-complexity-with-component-entity-systems). It provides the same features out of the box as the ```GameLoop``` but also includes a crude event/signaling pipeline for communication between your game and your other React components. You probably want to use the ```GameEngine``` to implement slightly more complex games and interactive scenes.
 
 ## Managing Complexity with Component Entity Systems
 
