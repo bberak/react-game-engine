@@ -34,6 +34,7 @@ export default class GameEngine extends Component {
     this.previousTime = null;
     this.previousDelta = null;
     this.events = [];
+    this.container = new React.createRef();
   }
 
   async componentDidMount() {
@@ -146,7 +147,7 @@ export default class GameEngine extends Component {
   render() {
     return (
       <div
-        ref={"container"}
+        ref={this.container}
         style={{ ...css.container, ...this.props.style }}
         className={this.props.className}
         tabIndex={0}
