@@ -34,7 +34,7 @@ export default class GameEngine extends Component {
     this.previousTime = null;
     this.previousDelta = null;
     this.events = [];
-    this.container = new React.createRef();
+    this.container = React.createRef();
   }
 
   async componentDidMount() {
@@ -75,7 +75,7 @@ export default class GameEngine extends Component {
     this.clear();
     this.timer.start();
     this.dispatch({ type: "started" });
-    this.refs.container.focus();
+    this.container.current.focus();
   };
 
   stop = () => {

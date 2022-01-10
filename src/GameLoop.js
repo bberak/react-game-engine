@@ -11,6 +11,7 @@ export default class GameLoop extends Component {
     this.input = [];
     this.previousTime = null;
     this.previousDelta = null;
+    this.container = React.createRef();
   }
 
   componentDidMount() {
@@ -22,9 +23,9 @@ export default class GameLoop extends Component {
     this.timer.unsubscribe(this.updateHandler);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.running !== this.props.running) {
-      if (nextProps.running) this.start();
+  componentDidUpdate(prevProps) {
+    if (prevProps.running !== this.props.running) {
+      if (this.props.running) this.start();
       else this.stop();
     }
   }
@@ -34,7 +35,7 @@ export default class GameLoop extends Component {
     this.previousTime = null;
     this.previousDelta = null;
     this.timer.start();
-    this.refs.container.focus();
+    this.container.current.focus();
   };
 
   stop = () => {
@@ -77,7 +78,7 @@ export default class GameLoop extends Component {
   render() {
     return (
       <div
-        ref={"container"}
+        ref={this.container}
         style={{ ...css.container, ...this.props.style }}
         className={this.props.className}
         tabIndex={0}
