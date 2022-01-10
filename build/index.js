@@ -261,7 +261,7 @@ var GameEngine = function (_Component) {
       _this.clear();
       _this.timer.start();
       _this.dispatch({ type: "started" });
-      _this.refs.container.focus();
+      _this.container.current.focus();
     };
 
     _this.stop = function () {
@@ -365,6 +365,7 @@ var GameEngine = function (_Component) {
     _this.previousTime = null;
     _this.previousDelta = null;
     _this.events = [];
+    _this.container = _react2.default.createRef();
     return _this;
   }
 
@@ -421,10 +422,10 @@ var GameEngine = function (_Component) {
       this.timer.unsubscribe(this.updateHandler);
     }
   }, {
-    key: "UNSAFE_componentWillReceiveProps",
-    value: function UNSAFE_componentWillReceiveProps(nextProps) {
-      if (nextProps.running !== this.props.running) {
-        if (nextProps.running) this.start();else this.stop();
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.running !== this.props.running) {
+        if (this.props.running) this.start();else this.stop();
       }
     }
   }, {
@@ -433,7 +434,7 @@ var GameEngine = function (_Component) {
       return _react2.default.createElement(
         "div",
         _extends({
-          ref: "container",
+          ref: this.container,
           style: _extends({}, css.container, this.props.style),
           className: this.props.className,
           tabIndex: 0
@@ -510,7 +511,7 @@ var GameLoop = function (_Component) {
       _this.previousTime = null;
       _this.previousDelta = null;
       _this.timer.start();
-      _this.refs.container.focus();
+      _this.container.current.focus();
     };
 
     _this.stop = function () {
@@ -554,6 +555,7 @@ var GameLoop = function (_Component) {
     _this.input = [];
     _this.previousTime = null;
     _this.previousDelta = null;
+    _this.container = _react2.default.createRef();
     return _this;
   }
 
@@ -569,10 +571,10 @@ var GameLoop = function (_Component) {
       this.timer.unsubscribe(this.updateHandler);
     }
   }, {
-    key: "UNSAFE_componentWillReceiveProps",
-    value: function UNSAFE_componentWillReceiveProps(nextProps) {
-      if (nextProps.running !== this.props.running) {
-        if (nextProps.running) this.start();else this.stop();
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.running !== this.props.running) {
+        if (this.props.running) this.start();else this.stop();
       }
     }
   }, {
@@ -581,7 +583,7 @@ var GameLoop = function (_Component) {
       return _react2.default.createElement(
         "div",
         _extends({
-          ref: "container",
+          ref: this.container,
           style: _extends({}, css.container, this.props.style),
           className: this.props.className,
           tabIndex: 0
