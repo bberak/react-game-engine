@@ -43,6 +43,6 @@
     "jest": "^22.4.2",
     "react": "*",
     "react-test-renderer": "^16.2.0",
-    "webpack": "^2.6.1"
+    "webpack": "^5.75.0"
   }
 }
