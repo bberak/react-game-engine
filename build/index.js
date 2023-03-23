@@ -332,15 +332,16 @@ var GameEngine = function (_Component) {
         }
       };
 
-      var newState = _this.props.systems.reduce(function (state, sys) {
-        return sys(state, args);
-      }, _this.state.entities);
-
-      _this.input.length = 0;
-      _this.events.length = 0;
-      _this.previousTime = currentTime;
-      _this.previousDelta = args.time.delta;
-      _this.setState({ entities: newState });
+      _this.setState(function (prevState) {
+        var newEntities = _this.props.systems.reduce(function (state, sys) {
+          return sys(state, args);
+        }, prevState.entities);
+        _this.input.length = 0;
+        _this.events.length = 0;
+        _this.previousTime = currentTime;
+        _this.previousDelta = args.time.delta;
+        return { entities: newEntities };
+      });
     };
 
     _this.inputHandlers = events.split(" ").map(function (name) {
@@ -360,7 +361,6 @@ var GameEngine = function (_Component) {
       entities: null
     };
     _this.timer = props.timer || new _DefaultTimer2.default();
-    _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
     _this.previousTime = null;
     _this.previousDelta = null;
@@ -380,20 +380,22 @@ var GameEngine = function (_Component) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                this.timer.subscribe(this.updateHandler);
+
                 entities = getEntitiesFromProps(this.props);
 
                 if (!isPromise(entities)) {
-                  _context2.next = 5;
+                  _context2.next = 6;
                   break;
                 }
 
-                _context2.next = 4;
+                _context2.next = 5;
                 return entities;
 
-              case 4:
+              case 5:
                 entities = _context2.sent;
 
-              case 5:
+              case 6:
 
                 this.setState({
                   entities: entities || {}
@@ -401,7 +403,7 @@ var GameEngine = function (_Component) {
                   if (_this3.props.running) _this3.start();
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context2.stop();
             }
