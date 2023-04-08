@@ -7,7 +7,6 @@ export default class GameLoop extends Component {
   constructor(props) {
     super(props);
     this.timer = props.timer || new DefaultTimer();
-    this.timer.subscribe(this.updateHandler);
     this.input = [];
     this.previousTime = null;
     this.previousDelta = null;
@@ -15,6 +14,8 @@ export default class GameLoop extends Component {
   }
 
   componentDidMount() {
+    this.timer.subscribe(this.updateHandler);
+    
     if (this.props.running) this.start();
   }
 
