@@ -29,7 +29,6 @@ export default class GameEngine extends Component {
       entities: null
     };
     this.timer = props.timer || new DefaultTimer();
-    this.timer.subscribe(this.updateHandler);
     this.input = [];
     this.previousTime = null;
     this.previousDelta = null;
@@ -38,6 +37,8 @@ export default class GameEngine extends Component {
   }
 
   async componentDidMount() {
+    this.timer.subscribe(this.updateHandler);
+
     let entities = getEntitiesFromProps(this.props);
 
     if (isPromise(entities)) entities = await entities;
@@ -118,16 +119,17 @@ export default class GameEngine extends Component {
       }
     };
 
-    let newState = this.props.systems.reduce(
-      (state, sys) => sys(state, args),
-      this.state.entities
-    );
-
-    this.input.length = 0;
-    this.events.length = 0;
-    this.previousTime = currentTime;
-    this.previousDelta = args.time.delta;
-    this.setState({ entities: newState });
+    this.setState(prevState => {
+      let newEntities = this.props.systems.reduce(
+        (state, sys) => sys(state, args),
+        prevState.entities
+      );
+      this.input.length = 0;
+      this.events.length = 0;
+      this.previousTime = currentTime;
+      this.previousDelta = args.time.delta;
+      return { entities: newEntities};
+    });
   };
 
   inputHandlers = events
