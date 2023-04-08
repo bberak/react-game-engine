@@ -553,7 +553,6 @@ var GameLoop = function (_Component) {
     }, {});
 
     _this.timer = props.timer || new _DefaultTimer2.default();
-    _this.timer.subscribe(_this.updateHandler);
     _this.input = [];
     _this.previousTime = null;
     _this.previousDelta = null;
@@ -564,6 +563,8 @@ var GameLoop = function (_Component) {
   _createClass(GameLoop, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.timer.subscribe(this.updateHandler);
+
       if (this.props.running) this.start();
     }
   }, {
