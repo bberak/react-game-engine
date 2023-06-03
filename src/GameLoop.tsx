@@ -1,10 +1,42 @@
-import React, { Component } from "react";
-import DefaultTimer from "./DefaultTimer";
+import React, { Component } from 'react';
 
-const events = `onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onWheel onTouchCancel onTouchEnd onTouchMove onTouchStart onKeyDown onKeyPress onKeyUp`;
+import DefaultTimer from './DefaultTimer';
+import EVENTS, { EventName } from './events';
 
-export default class GameLoop extends Component {
-  constructor(props) {
+type Input = React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>;
+
+export interface UpdateArgs {
+  input: { name: EventName, payload: Input }[];
+  window: Window;
+  time: {
+    current: number;
+    previous: number | null;
+    delta: number;
+    previousDelta: number | null;
+  };
+}
+
+interface GameLoopProps {
+  running?: boolean;
+  style?: React.CSSProperties;
+  className?: string;
+  children: JSX.Element;
+  timer: DefaultTimer;
+  onUpdate: (args: UpdateArgs) => void;
+}
+
+export default class GameLoop extends Component<GameLoopProps> {
+  static defaultProps = {
+    running: true,
+  };
+
+  timer: DefaultTimer;
+  input: { name: EventName, payload: Input }[];
+  previousTime: number | null;
+  previousDelta: number | null;
+  container: React.RefObject<HTMLDivElement>;
+
+  constructor(props: GameLoopProps) {
     super(props);
     this.timer = props.timer || new DefaultTimer();
     this.input = [];
@@ -15,8 +47,10 @@ export default class GameLoop extends Component {
 
   componentDidMount() {
     this.timer.subscribe(this.updateHandler);
-    
-    if (this.props.running) this.start();
+
+    if (this.props.running) {
+      this.start();
+    }
   }
 
   componentWillUnmount() {
@@ -24,10 +58,9 @@ export default class GameLoop extends Component {
     this.timer.unsubscribe(this.updateHandler);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: GameLoopProps) {
     if (prevProps.running !== this.props.running) {
-      if (this.props.running) this.start();
-      else this.stop();
+      this.props.running ? this.start() : this.stop();
     }
   }
 
@@ -36,14 +69,14 @@ export default class GameLoop extends Component {
     this.previousTime = null;
     this.previousDelta = null;
     this.timer.start();
-    this.container.current.focus();
+    this.container.current?.focus();
   };
 
   stop = () => {
     this.timer.stop();
   };
 
-  updateHandler = currentTime => {
+  updateHandler = (currentTime: number) => {
     let args = {
       input: this.input,
       window: window,
@@ -62,19 +95,15 @@ export default class GameLoop extends Component {
     this.previousDelta = args.time.delta;
   };
 
-  inputHandlers = events
-    .split(" ")
-    .map(name => ({
-      name,
-      handler: payload => {
-        payload.persist();
+  inputHandlers = EVENTS
+    .reduce((acc, name) => ({
+      ...acc,
+      [name]: (payload: Input) => {
+        payload?.persist();
         this.input.push({ name, payload });
       }
-    }))
-    .reduce((acc, val) => {
-      acc[val.name] = val.handler;
-      return acc;
-    }, {});
+    }), {} as Record<EventName, (payload: Input) => void>);
+
 
   render() {
     return (
@@ -98,6 +127,6 @@ GameLoop.defaultProps = {
 const css = {
   container: {
     flex: 1,
-    outline: "none"
+    outline: 'none'
   }
 };
