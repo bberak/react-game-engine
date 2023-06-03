@@ -2,13 +2,13 @@
   "name": "react-game-engine",
   "version": "1.2.0",
   "description": "A lightweight game engine for React projects",
-  "main": "./dist/my-lib.umd.cjs",
-  "module": "./dist/my-lib.js",
+  "main": "./dist/react-game-engine.umd.cjs",
+  "module": "./dist/react-game-engine.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.js",
-      "require": "./dist/my-lib.umd.cjs"
+      "import": "./dist/react-game-engine.js",
+      "require": "./dist/react-game-engine.umd.cjs"
     }
   },
   "files": [
