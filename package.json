@@ -2,14 +2,21 @@
   "name": "react-game-engine",
   "version": "1.2.0",
   "description": "A lightweight game engine for React projects",
-  "main": "build/index.js",
-  "scripts": {
-    "test": "jest",
-    "build": "webpack",
-    "prepublish": "rm -rf ./build && npm run build"
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    }
   },
-  "jest": {
-    "testURL": "http://localhost/"
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc & vite build",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,16 +40,11 @@
     "react": ">= 16.3.0"
   },
   "devDependencies": {
-    "babel-jest": "^22.4.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "jest": "^22.4.2",
-    "react": "*",
-    "react-test-renderer": "^16.2.0",
-    "webpack": "^2.6.1"
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.2.8",
+    "react": "^16.3.0",
+    "typescript": "^5.1.0",
+    "vite": "latest",
+    "vite-plugin-dts": "^2.3.0"
   }
 }

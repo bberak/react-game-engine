@@ -1,4 +1,4 @@
-/* 
+/*
 With thanks, https://github.com/FormidableLabs/react-game-kit/blob/master/src/native/utils/game-loop.js
 */
 
@@ -15,40 +15,38 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 export default class DefaultTimer {
-  constructor() {
-    this.subscribers = [];
-    this.loopId = null;
-  }
+  subscribers: ((time: number) => void)[] = [];
+  timestamp: number | null = null;
 
-  loop = time => {
-    if (this.loopId) {
+  loop = (time: number) => {
+    if (this.timestamp) {
       this.subscribers.forEach(callback => {
         callback(time);
       });
     }
 
-    this.loopId = requestAnimationFrame(this.loop);
+    this.timestamp = requestAnimationFrame(this.loop);
   };
 
   start() {
-    if (!this.loopId) {
-      this.loop();
+    if (!this.timestamp) {
+      this.loop(undefined!);
     }
   }
 
   stop() {
-    if (this.loopId) {
-      cancelAnimationFrame(this.loopId);
-      this.loopId = null;
+    if (this.timestamp) {
+      cancelAnimationFrame(this.timestamp);
+      this.timestamp = null;
     }
   }
 
-  subscribe(callback) {
+  subscribe(callback: (time: number) => void) {
     if (this.subscribers.indexOf(callback) === -1)
       this.subscribers.push(callback);
   }
 
-  unsubscribe(callback) {
+  unsubscribe(callback: (time: number) => void) {
     this.subscribers = this.subscribers.filter(s => s !== callback)
   }
 }
